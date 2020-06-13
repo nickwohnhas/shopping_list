@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  text-align: center
+  text-align: center;
 }
 
 .login-container h1 {
@@ -16,7 +16,7 @@
 }
 
 .field {
-  padding: .5em;
+  padding: 0.5em;
 }
 
 input {
@@ -43,7 +43,9 @@ input.btn {
   font-size: 1em;
   margin-bottom: 2em;
   color: #f4f4f4;
-  background: #3E4F89;
+  background: #3e4f89;
+  padding: 10px;
+  margin-top: 1em;
 }
 
 input.btn:hover {

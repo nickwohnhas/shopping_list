@@ -2,8 +2,8 @@ import React from 'react';
 
 const Item = ({name}) => {
   return (
-    <div>
-      {name}
+    <div className="user-card">
+      {name} Quantity: 0  <button className="btn">+</button><button className="btn">-</button>
     </div>
   );
 };

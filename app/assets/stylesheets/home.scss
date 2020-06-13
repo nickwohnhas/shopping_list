@@ -7,11 +7,20 @@
 }
 
 .header h1 {
-  background: #3E4F89;
+  background: #3e4f89;
 }
 
 .user-list {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.user-card {
+  background: #f4f4f4;
+  padding: 2em;
+}
+
+.btn {
+  padding: 0.25em 1em;
 }
