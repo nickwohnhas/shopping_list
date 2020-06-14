@@ -1,24 +1,9 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This application will allow you to build a virtual fridge and then utilize the Spoontacular API to retrieve potential recipes based on what you have in your fridge.  Additionally, it will provide you with items that you still need to purchase so that you can make a shopping list.
 
-Things you may want to cover:
+* Ruby version 2.6.5
 
-* Ruby version
+* This app uses the Postgres DB
 
-* System dependencies
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
