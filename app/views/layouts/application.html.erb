@@ -10,8 +10,22 @@
   </head>
 
   <body>
+    <nav id="layout-nav" class="navbar navbar-dark">
+      <ul class="navbar-nav mr-auto justify-content-between align-items-baseline">
+        <li class="nav-item active text-white">
+          <h1 id="app-title" class="navbar-brand display-3" href="#">ShoppingList</h1>
+        </li>
+        <% if current_user %>
+        <li class="nav-item active text-white">
+          <a class="nav-link" href=<%= destroy_user_session_path %>>Sign Out <span class="sr-only">(current)</span></a>
+        </li>
+        <% end %>
+      </ul>
+    </nav>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <div class='container'>
+      <%= yield %>
+    </div>
   </body>
 </html>
