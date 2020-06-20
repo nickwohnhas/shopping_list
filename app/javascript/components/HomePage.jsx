@@ -1,18 +1,14 @@
 import React from 'react';
+import Fridge from './Fridge';
+import NavOptions from './NavOptions';
 import Items from './Items.jsx';
 import ItemForm from './ItemForm.jsx';
 
-const HomePage = ({ items }) => {
-  const handleOnClick = () => {
-    window.location.href = '/users/sign_out';
-  };
-
+const HomePage = () => {
   return (
     <div>
-      <section>
-        <ItemForm />
-        <Items items={items} />
-      </section>
+      <NavOptions />
+      <Fridge />
     </div>
   );
 };

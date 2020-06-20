@@ -1,11 +1,10 @@
 import React from 'react';
 import Item from './Item.jsx';
 
-const Items = ({items}) => {
-
+const Items = ({ items }) => {
   return (
     <div className="user-list">
-      {items.map(item => <Item key={item.id} name={item.name}/>)}
+      {items.map(item => <Item key={item.id} name={item.name} />)}
     </div>
   );
 };
