@@ -1,6 +1,10 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  has_one :fridge
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  after_create :assign_fridge
+
+  def assign_fridge
+    Fridge.create! user: self
+  end
 end
