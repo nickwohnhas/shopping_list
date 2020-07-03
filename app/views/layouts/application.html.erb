@@ -12,9 +12,12 @@
 
   <body>
     <nav id="layout-nav" class="navbar navbar-dark">
-      <ul class="navbar-nav mr-auto justify-content-between align-items-baseline">
+      <ul class="navbar-nav mr-1 align-items-baseline">
         <li class="nav-item active text-white">
-          <h1 id="app-title" class="navbar-brand display-3" href="#">ShoppingList</h1>
+          <h1 id="app-title" class="navbar-brand display-3">ShoppingList</h1>
+        </li>
+        <li class="nav-item active text-white">
+          <a class="nav-link" href=<%= groups_path %>>Groups <span class="sr-only">(current)</span></a>
         </li>
         <% if current_user %>
         <li class="nav-item active text-white">
