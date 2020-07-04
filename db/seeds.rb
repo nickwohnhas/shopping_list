@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+user = User.create!(email: "user@example.com", password: "cheeseybread")
+
+["Dairy", "Veggies", "Fruits", "Protein", "Veggies", "Fish", "Legumes", "Fats", "Dairy", "Poultry"].each do |group|
+  Group.create! name: group, fridge: user.fridge
+end

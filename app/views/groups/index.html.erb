@@ -4,8 +4,9 @@
 <% if @groups.length > 0 %>
 <ul>
   <% @groups.each do |group| %>
-    <li><%= group.name %></li>
-    <%= link_to "Edit #{group.name}", edit_group_path(group)%>
+    <li><%= link_to group.name, group %></li>
+    <%= link_to "Edit", edit_group_path(group)%>
+    <%= link_to "Delete", group, method: :delete %>
     <% end %>
 </ul>
 <% else %>
