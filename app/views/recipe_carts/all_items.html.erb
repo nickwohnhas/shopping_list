@@ -1,0 +1,12 @@
+<h1>Search for Recipes</h1>
+
+<% if @items.length > 0 %>
+<ul>
+  <% @items.each do |item| %>
+  <li><%= item.name %></li>
+  <% end %>
+</ul>
+<% else %>
+<p>No items have been selected for the recipe search.  Go through each food group and select the items that you wish to be included in the recipe search.</p>
+<% end %>
+
