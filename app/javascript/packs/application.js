@@ -16,4 +16,6 @@ require("channels")
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 // Support component names relative to this directory:
+import 'css/site'
+import '../../assets/stylesheets/application.scss';
 
