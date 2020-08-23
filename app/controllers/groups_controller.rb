@@ -1,5 +1,7 @@
 class GroupsController < ApplicationController
   before_action :authenticate_user!
+  before_action :ensure_user_has_cart, only: :index
+
   def index
     @groups = Group.where(fridge: current_user.fridge)
   end
