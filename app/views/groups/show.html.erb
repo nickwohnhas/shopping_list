@@ -1,21 +1,19 @@
 <h1><%= @group.name %></h1>
 <div class="group-links">
-  <%= link_to "Return to Groups", groups_path%>
+  <%= link_to "Return to Groups", groups_path %>
   <%= link_to "Add Item", new_group_item_path(group_id: @group.id)%>
 </div>
 
 <% if @group.items.length > 0 %>
   <div class="group-checkboxes">
-    <%= form_with do %>
-      <% @group.items.each do |item| %>
-        <label class="container-checkbox"><%= item.name %>
-          <%= check_box_tag item.name, item.name, false, class: "checkmark" %>
-          <span class="checkmark"></span>
-        </label>
+    <%= form_with url: recipe_cart_add_items_path do %>
+      <%= collection_check_boxes(:group , :item_ids, @group.items, :id, :name) do |b| %>
+      <%=  b.label { b.check_box + b.text } %>
       <% end %>
-    <%= submit_tag "Add To Recipe Search" %>
+      <%= submit_tag "Add To Recipe Search" %>
     <% end %>
   </div>
+
 <% else %>
   <p>This group has no items!</p>
 <% end %>

@@ -1,5 +1,7 @@
-<%= form_with model: [@group, @item], class: "nifty_form" do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.submit "Create Item" %>
+<%= form_with model: [@group, @item] do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+  <%= f.submit "Create Item", class: "btn btn-primary" %>
 <% end %>

@@ -17,15 +17,14 @@
 
 .field {
   padding: 0.5em;
-}
-
-input {
-  padding: 10px;
-  width: 400px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  font-size: 1em;
+  input {
+    padding: 10px;
+    width: 400px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-size: 1em;
+  }
 }
 
 form {
@@ -41,6 +40,7 @@ form {
 
 input.btn {
   font-size: 1em;
+  width: 400px;
   margin-bottom: 2em;
   color: #f4f4f4;
   background: #3e4f89;
