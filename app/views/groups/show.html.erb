@@ -7,6 +7,7 @@
 <% if @group.items.length > 0 %>
   <div class="group-checkboxes">
     <%= form_with url: recipe_cart_add_items_path do %>
+    <%= hidden_field_tag :group_id, @group.id %>
       <%= collection_check_boxes(:group , :item_ids, @group.items, :id, :name) do |b| %>
       <%=  b.label { b.check_box + b.text } %>
       <% end %>
