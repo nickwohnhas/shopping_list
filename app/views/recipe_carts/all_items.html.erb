@@ -4,9 +4,10 @@
 <ul>
   <% @items.each do |item| %>
   <li><%= item.name %></li>
+  <%= link_to "Remove Item", "/recipe_cart/remove_item/#{item.id}", method: :delete %>
   <% end %>
 </ul>
-<%= link_to "Search for Recipes", recipe_cart_get_recipes_path %>
+<%= link_to "Search for Recipes", recipe_cart_recipes_path %>
 <% else %>
 <p>No items have been selected for the recipe search.  Go through each food group and select the items that you wish to be included in the recipe search.</p>
 <% end %>

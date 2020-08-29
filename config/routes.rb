@@ -5,7 +5,8 @@ Rails.application.routes.draw do
 
   get '/recipe_cart/all_items', to: 'recipe_carts#all_items'
   post '/recipe_cart/add_items', to: 'recipe_carts#add_items'
-  get '/recipe_cart/get_recipes', to: 'recipe_carts#get_recipes'
+  get '/recipe_cart/recipes', to: 'recipe_carts#recipes'
+  delete '/recipe_cart/remove_item/:id', to: 'recipe_carts#remove_item'
 
   devise_for :users
   root to: "groups#index"

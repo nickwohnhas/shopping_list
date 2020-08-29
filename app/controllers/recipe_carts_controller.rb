@@ -16,9 +16,19 @@ class RecipeCartsController < ApplicationController
      end
   end
 
-  def get_recipes
+  def recipes
     food_items = Item.where(recipe_cart: current_user.recipe_cart).pluck(:name).join(",")
     response = Faraday.get "https://api.spoonacular.com/recipes/findByIngredients?apiKey=#{ENV["SPOONTACULAR_API_KEY"]}&ingredients=#{food_items}"
     @items = JSON.parse(response.body)
+  end
+
+  def remove_item
+    food_items = Item.where(recipe_cart: current_user.recipe_cart).where.not(id: params[:id])
+    current_user.recipe_cart.items = food_items
+    if current_user.recipe_cart.save
+      redirect_to recipe_cart_all_items_path, notice: "Item has been removed."
+    else
+      redirect_to recipe_cart_all_items_path, notice: "Failed to remove item"
+    end
   end
 end
