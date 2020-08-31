@@ -9,12 +9,14 @@
     <%= form_with url: recipe_cart_add_items_path do %>
     <%= hidden_field_tag :group_id, @group.id %>
       <%= collection_check_boxes(:group , :item_ids, @group.items, :id, :name) do |b| %>
-      <%=  b.label { b.check_box + b.text } %>
+      <%=  b.label(class: "container-checkbox") { b.check_box(class: "checkbox") + b.text + "<span class='checkmark'></span>".html_safe} %>
       <% end %>
-      <%= submit_tag "Add To Recipe Search" %>
+      <%= submit_tag "Add To Recipe Search", class: "form-button" %>
     <% end %>
   </div>
+
 
 <% else %>
   <p>This group has no items!</p>
 <% end %>
+
