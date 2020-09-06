@@ -18,4 +18,5 @@ require("channels")
 // Support component names relative to this directory:
 import 'css/site'
 import '../../assets/stylesheets/application.scss';
+import "@fortawesome/fontawesome-free/css/all.css"
 
