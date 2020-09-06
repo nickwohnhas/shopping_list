@@ -23,12 +23,12 @@
           <a class="nav-link" href=<%= recipe_cart_all_items_path %>>Find Recipes <span class="sr-only">(current)</span></a>
         </li>
         <li>
-          <i class="fas fa-shopping-cart" aria-hidden="true" style="color:white"><span class="item-count">1</span></i>
+          <i class="fas fa-shopping-cart" aria-hidden="true" style="color:white"><span class="item-count"><%= current_user.recipe_cart.items.count  %></span></i>
         </li>
         <% if current_user %>
-        <li class="nav-item active text-white">
-          <a class="nav-link" href=<%= destroy_user_session_path %>>Sign Out <span class="sr-only">(current)</span></a>
-        </li>
+          <li class="nav-item active text-white">
+            <a class="nav-link" href=<%= destroy_user_session_path %>>Sign Out <span class="sr-only">(current)</span></a>
+          </li>
         <% end %>
       </ul>
     </nav>
