@@ -1,5 +1,6 @@
-<ul>
-  <% @items.each do |item_obj| %>
-    <li><%= item_obj["title"] %></li>
-  <% end %>
-</ul>
+<h1>Search for Recipes</h1>
+<%= form_with url: recipe_cart_search_recipes_path do %>
+  <%= label_tag "Recipe Name:"  %>
+  <%= text_field_tag 'query'  %>
+  <%= submit_tag "Search"   %>
+<% end %>
