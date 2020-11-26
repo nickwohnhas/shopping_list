@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_05_203002) do
+ActiveRecord::Schema.define(version: 2020_11_26_193958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,12 @@ ActiveRecord::Schema.define(version: 2020_07_05_203002) do
     t.index ["recipe_cart_id"], name: "index_items_on_recipe_cart_id"
   end
 
+  create_table "lists", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "name"
+    t.index ["user_id"], name: "index_lists_on_user_id"
+  end
+
   create_table "recipe_carts", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -59,5 +65,6 @@ ActiveRecord::Schema.define(version: 2020_07_05_203002) do
 
   add_foreign_key "fridges", "users"
   add_foreign_key "items", "recipe_carts"
+  add_foreign_key "lists", "users"
   add_foreign_key "recipe_carts", "users"
 end
