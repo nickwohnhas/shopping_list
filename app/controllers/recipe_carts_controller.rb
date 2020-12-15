@@ -21,8 +21,9 @@ class RecipeCartsController < ApplicationController
 
 
   def search_recipes
-    # query api
-    # render json of recipes
+    response = Faraday.get("https://api.spoonacular.com/recipes/complexSearch?apiKey=#{ENV["SPOONTACULAR_API_KEY"]}&query=#{params[:name]}")
+    json = JSON.parse(response.body)
+    render json: json
   end
 
   def remove_item
