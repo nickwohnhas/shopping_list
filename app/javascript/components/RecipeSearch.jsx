@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Button, Checkbox, Divider, Form, Header, List } from 'semantic-ui-react'
 
-const RecipeSearch = ({ ingredientsPath, recipeSearchPath }) => {
+const RecipeSearch = ({ addIngredientsPath, ingredientsPath, recipeSearchPath }) => {
   const [searchQuery, setSearchQuery] = useState("")
   const [recipes, setRecipes] = useState(null)
   const [selectedRecipe, setSelectedRecipe] = useState(null)
   const [ingredients, setIngredients] = useState(null)
+  const [chosenIngredients, setChosenIngredients] = useState([])
   const token = document.querySelector('[name=csrf-token]').content
 
   const handleSubmit = (e) => {
@@ -51,6 +52,37 @@ const RecipeSearch = ({ ingredientsPath, recipeSearchPath }) => {
       })
   }
 
+  const handleIngredientSubmit = () => {
+    fetch(addIngredientsPath, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'X-CSRF-TOKEN': token
+      },
+      body: JSON.stringify({ checked_ingredients: chosenIngredients })
+    })
+      .then((res) => {
+        return res.json()
+      })
+      .then((json) => {
+        console.log(json)
+      })
+  }
+
+  const handleCheckboxChange = (e) => {
+    const ingredientName = e.target.textContent
+    let currentIngredients = [...chosenIngredients]
+
+    if (!currentIngredients.find((item) => (item.name == ingredientName))) {
+      currentIngredients.push({ name: ingredientName })
+      setChosenIngredients(currentIngredients)
+    } else {
+      const updatedIngredients = chosenIngredients.filter((ingred) => !ingred.name == ingredientName)
+      setChosenIngredients(updatedIngredients)
+    }
+  }
+
   return (
     <div>
       <h1>Search for recipes</h1>
@@ -73,12 +105,14 @@ const RecipeSearch = ({ ingredientsPath, recipeSearchPath }) => {
         <div>
           <Divider />
           <Header as='h1'>{selectedRecipe}</Header>
-          <Form>
+          <Form id="ingredient-form" onSubmit={handleIngredientSubmit}>
             {ingredients.map(({ name }) => {
               return (
-                <Form.Field
-                  control={Checkbox}
+                <Form.Checkbox
                   label={{ children: name }}
+                  control={Checkbox}
+                  onChange={handleCheckboxChange}
+                  checked={chosenIngredients.find((item) => (item.name == name))}
                 />
               )
             })}

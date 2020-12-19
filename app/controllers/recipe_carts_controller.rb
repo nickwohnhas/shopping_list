@@ -16,6 +16,16 @@ class RecipeCartsController < ApplicationController
     end
   end
 
+  def add_ingredients_to_list
+    spoontacular_group = Group.find_or_create_by(name: "Spoontacular", fridge: current_user.fridge)
+    items = params[:checked_ingredients].map {|ingred| Item.new(name: ingred["name"], recipe_cart: current_user.recipe_cart, group: spoontacular_group) }
+    items.map(&:save!)
+    recipe_cart = RecipeCart.find_by(user: current_user)
+    recipe_cart.items << items
+    recipe_cart.save!
+    render json: {status: "Successful"}
+  end
+
   def recipes
   end
 
