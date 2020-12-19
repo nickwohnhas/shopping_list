@@ -7,6 +7,9 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+var componentRequireContext = require.context("components", true);
+var ReactRailsUJS = require("react_ujs");
+ReactRailsUJS.useContext(componentRequireContext);
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
@@ -19,4 +22,6 @@ require("channels")
 import 'css/site'
 import '../../assets/stylesheets/application.scss';
 import "@fortawesome/fontawesome-free/css/all.css"
+import 'semantic-ui-css/semantic.min.css'
+
 

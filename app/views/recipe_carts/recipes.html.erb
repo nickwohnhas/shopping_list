@@ -1,5 +1,1 @@
-<ul>
-  <% @items.each do |item_obj| %>
-    <li><%= item_obj["title"] %></li>
-  <% end %>
-</ul>
+<%= react_component "RecipeSearch", {addIngredientsPath: recipe_cart_add_ingredients_to_list_path,ingredientsPath: recipe_cart_ingredients_path, recipeSearchPath: recipe_cart_search_recipes_path} %>

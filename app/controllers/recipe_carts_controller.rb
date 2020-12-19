@@ -9,17 +9,36 @@ class RecipeCartsController < ApplicationController
     group = Group.find(params[:group_id])
     items = Item.where(id: params[:group][:item_ids])
     current_user.recipe_cart.items << items
-     if current_user.recipe_cart.save
-        redirect_to group_path(group), notice: "Successfully added items to cart!"
-     else
+    if current_user.recipe_cart.save
+      redirect_to group_path(group), notice: "Successfully added items to cart!"
+    else
       redirect_to group_path(group), notice: "Failed to add items"
-     end
+    end
+  end
+
+  def add_ingredients_to_list
+    spoontacular_group = Group.find_or_create_by(name: "Spoontacular", fridge: current_user.fridge)
+    items = params[:checked_ingredients].map {|ingred| Item.new(name: ingred["name"], recipe_cart: current_user.recipe_cart, group: spoontacular_group) }
+    items.map(&:save!)
+    recipe_cart = RecipeCart.find_by(user: current_user)
+    recipe_cart.items << items
+    recipe_cart.save!
+    render json: {status: "Successful"}
   end
 
   def recipes
-    food_items = Item.where(recipe_cart: current_user.recipe_cart).pluck(:name).join(",")
-    response = Faraday.get "https://api.spoonacular.com/recipes/findByIngredients?apiKey=#{ENV["SPOONTACULAR_API_KEY"]}&ingredients=#{food_items}"
-    @items = JSON.parse(response.body)
+  end
+
+  def ingredients
+    response = Faraday.get "https://api.spoonacular.com/recipes/#{params[:recipe_cart][:id]}/ingredientWidget.json?apiKey=#{ENV["SPOONTACULAR_API_KEY"]}"
+    json = JSON.parse(response.body)
+    render json: json
+  end
+
+  def search_recipes
+    response = Faraday.get("https://api.spoonacular.com/recipes/complexSearch?apiKey=#{ENV["SPOONTACULAR_API_KEY"]}&query=#{params[:name]}")
+    json = JSON.parse(response.body)
+    render json: json
   end
 
   def remove_item
