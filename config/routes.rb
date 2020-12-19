@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post 'recipe_cart/search_recipes', to: 'recipe_carts#search_recipes'
   get '/recipe_cart/recipes', to: 'recipe_carts#recipes'
   delete '/recipe_cart/remove_item/:id', to: 'recipe_carts#remove_item'
+  post '/recipe_cart/ingredients', to: 'recipe_carts#ingredients'
 
   devise_for :users
   root to: "groups#index"

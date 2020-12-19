@@ -19,6 +19,11 @@ class RecipeCartsController < ApplicationController
   def recipes
   end
 
+  def ingredients
+    response = Faraday.get "https://api.spoonacular.com/recipes/#{params[:recipe_cart][:id]}/ingredientWidget.json?apiKey=#{ENV["SPOONTACULAR_API_KEY"]}"
+    json = JSON.parse(response.body)
+    render json: json
+  end
 
   def search_recipes
     response = Faraday.get("https://api.spoonacular.com/recipes/complexSearch?apiKey=#{ENV["SPOONTACULAR_API_KEY"]}&query=#{params[:name]}")

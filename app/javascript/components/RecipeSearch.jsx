@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { Button, Form, List } from 'semantic-ui-react'
+import { Button, Checkbox, Divider, Form, Header, List } from 'semantic-ui-react'
 
-const RecipeSearch = ({ recipeSearchPath }) => {
+const RecipeSearch = ({ ingredientsPath, recipeSearchPath }) => {
   const [searchQuery, setSearchQuery] = useState("")
   const [recipes, setRecipes] = useState(null)
+  const [selectedRecipe, setSelectedRecipe] = useState(null)
+  const [ingredients, setIngredients] = useState(null)
   const token = document.querySelector('[name=csrf-token]').content
 
   const handleSubmit = (e) => {
@@ -21,13 +23,32 @@ const RecipeSearch = ({ recipeSearchPath }) => {
         return res.json()
       })
       .then((data) => {
-        console.log(data.results)
         setRecipes(data.results)
       })
   }
 
   const handleChange = (e) => {
     setSearchQuery(e.target.value);
+  }
+
+  const handleClick = (e) => {
+    const id = e.target.id
+    setSelectedRecipe(e.target.textContent)
+    fetch(ingredientsPath, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'X-CSRF-TOKEN': token
+      },
+      body: JSON.stringify({ id: id })
+    })
+      .then((res) => {
+        return res.json()
+      })
+      .then((data) => {
+        setIngredients(data.ingredients)
+      })
   }
 
   return (
@@ -41,12 +62,29 @@ const RecipeSearch = ({ recipeSearchPath }) => {
 
         <Button type='submit'>Search</Button>
       </Form>
-      {recipes && (
+      {recipes && !ingredients && (
         <List>
-          {recipes.map(({ title }) => {
-            return <List.Item>{title}</List.Item>
+          {recipes.map(({ id, title }) => {
+            return <List.Item id={id} onClick={handleClick}>{title}</List.Item>
           })}
         </List>
+      )}
+      {ingredients && (
+        <div>
+          <Divider />
+          <Header as='h1'>{selectedRecipe}</Header>
+          <Form>
+            {ingredients.map(({ name }) => {
+              return (
+                <Form.Field
+                  control={Checkbox}
+                  label={{ children: name }}
+                />
+              )
+            })}
+            <Button type='submit'>Add to Cart</Button>
+          </Form>
+        </div>
       )}
     </div>
   )
