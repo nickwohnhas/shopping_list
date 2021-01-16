@@ -18,7 +18,7 @@ class ListsController < ApplicationController
   end
 
   def index
-    @lists = List.all
+    @lists = List.where(user: current_user)
   end
 
   def show

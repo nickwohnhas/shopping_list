@@ -1,5 +1,12 @@
-<ul>
-<% @lists.each do |list| %>
-  <li><%= link_to list.name, list_path(list) %></li>
-<% end %>
-</ul>
+<div class="center-container">
+  <% if @lists.empty? %>
+    <p>No lists have been created.</p>
+  <% else %>
+    <ul>
+    <% @lists.each do |list| %>
+      <li><%= link_to list.name, list_path(list) %></li>
+    <% end %>
+    </ul>
+  <% end %>
+</div>
+
