@@ -66,7 +66,8 @@ const RecipeSearch = ({ addIngredientsPath, ingredientsPath, recipeSearchPath })
         return res.json()
       })
       .then((json) => {
-        console.log(json)
+        const cart = document.querySelector(".item-count");
+        cart.textContent = json.cartCount;
       })
   }
 

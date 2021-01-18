@@ -23,7 +23,7 @@ class RecipeCartsController < ApplicationController
     recipe_cart = RecipeCart.find_by(user: current_user)
     recipe_cart.items << items
     recipe_cart.save!
-    render json: {status: "Successful"}
+    render json: {status: "Successful", cartCount: recipe_cart.items.count}
   end
 
   def recipes
