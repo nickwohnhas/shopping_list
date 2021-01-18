@@ -24,7 +24,8 @@ const RecipeSearch = ({ addIngredientsPath, ingredientsPath, recipeSearchPath })
         return res.json()
       })
       .then((data) => {
-        setRecipes(data.results)
+        setIngredients(null);
+        setRecipes(data.results);
       })
   }
 
@@ -33,6 +34,7 @@ const RecipeSearch = ({ addIngredientsPath, ingredientsPath, recipeSearchPath })
   }
 
   const handleClick = (e) => {
+    e.preventDefault();
     const id = e.target.id
     setSelectedRecipe(e.target.textContent)
     fetch(ingredientsPath, {
@@ -98,7 +100,13 @@ const RecipeSearch = ({ addIngredientsPath, ingredientsPath, recipeSearchPath })
       {recipes && !ingredients && (
         <List>
           {recipes.map(({ id, title }) => {
-            return <List.Item id={id} onClick={handleClick}>{title}</List.Item>
+            return (
+              <List.Item onClick={handleClick} name={title}>
+                <List.Content>
+                  <a href="#" id={id}> {title} </a>
+                </List.Content>
+              </List.Item>
+            )
           })}
         </List>
       )}
