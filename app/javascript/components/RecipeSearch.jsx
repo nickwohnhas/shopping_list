@@ -81,7 +81,7 @@ const RecipeSearch = ({ addIngredientsPath, ingredientsPath, recipeSearchPath })
       currentIngredients.push({ name: ingredientName })
       setChosenIngredients(currentIngredients)
     } else {
-      const updatedIngredients = chosenIngredients.filter((ingred) => !ingred.name == ingredientName)
+      const updatedIngredients = chosenIngredients.filter((ingred) => ingred.name !== ingredientName)
       setChosenIngredients(updatedIngredients)
     }
   }
